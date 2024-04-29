@@ -12,7 +12,7 @@
 
 void bubble_sort(int *array, size_t size)
 {
-	unsigned long int i, j, k,  tmp;
+	unsigned long int i, j, tmp;
 
 	if (size <= 2)
 		return;
@@ -26,10 +26,7 @@ void bubble_sort(int *array, size_t size)
 				tmp = array[j];
 				array[j] = array[j + 1];
 				array[j + 1] = tmp;
+				print_array(array, size);
 			}
 		}
-
-		for (k = 0; k < size; k++)
-			printf("%d ", array[k]);
-	}
 }
