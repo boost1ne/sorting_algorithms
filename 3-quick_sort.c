@@ -1,17 +1,21 @@
 #include "sort.h"
 
 /**
- * partition - partition
- * @array: array
- * @lo: lower
- * @hi: higher
- * @size: array's size
+ * lomuto_partition - Partitions the array using lomuto scheme.
+ *
+ * @array: Array to be partionned.
+ *
+ * @lo: lower value
+ *
+ * @hi: Higher value
+ *
+ * @size: Our array size
  * Return: i
  */
-int partition(int *array, int lo, int hi, size_t size)
+int lomuto_partition(int *array, int lo, int hi, size_t size)
 {
 	int i = lo - 1, j = lo;
-	int pivot = array[hi], aux = 0;
+	int pivot = array[hi], tmp = 0;
 
 	for (; j < hi; j++)
 	{
@@ -20,54 +24,60 @@ int partition(int *array, int lo, int hi, size_t size)
 			i++;
 			if (array[i] != array[j])
 			{
-				aux = array[i];
+				tmp = array[i];
 				array[i] = array[j];
-				array[j] = aux;
+				array[j] = tmp;
 				print_array(array, size);
 			}
 		}
 	}
 	if (array[i + 1] != array[hi])
 	{
-		aux = array[i + 1];
+		tmp = array[i + 1];
 		array[i + 1] = array[hi];
-		array[hi] = aux;
+		array[hi] = tmp;
 		print_array(array, size);
 	}
 	return (i + 1);
 }
 
 /**
- * quick_s - quick sort
- * @array: given array
- * @lo: lower
- * @hi:higher
+ * quickSort - Recursive quick sort fun
+ *
+ * @array: Array to be sorted
+ *
+ * @lo: lower element
+ *
+ * @hi: higher element
+ *
  * @size: array's size
- * Return: void
- */
-void quick_s(int *array, int lo, int hi, size_t size)
+ *
+ **/
+void quickSort(int *array, int lo, int hi, size_t size)
 {
 	int pivot;
 
 	if (lo < hi)
 	{
-		pivot = partition(array, lo, hi, size);
-		quick_s(array, lo, pivot - 1, size);
-		quick_s(array, pivot + 1, hi, size);
+		pivot = lomuto_partition(array, lo, hi, size);
+		quickSort(array, lo, pivot - 1, size);
+		quickSort(array, pivot + 1, hi, size);
 	}
 }
 
 /**
  * quick_sort - function that sorts an array of integers
- *              in ascending order using the Quick sort algorithm
- * @array: array
- * @size: array's size
- * Return: void
- */
+ *
+ * in ascending order using the Quick sort algorithm
+ *
+ * @array: Pointer to the array to be sorted
+ *
+ * @size: Array's size
+ **/
 void quick_sort(int *array, size_t size)
 {
 	if (array == NULL || size < 2)
 		return;
 
-	quick_s(array, 0, size - 1, size);
+	quickSort(array, 0, size - 1, size);
 }
