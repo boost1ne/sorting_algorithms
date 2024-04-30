@@ -1,10 +1,10 @@
 #include "sort.h"
 
 /**
- * lomuto_partition - partition
- * @array: array
- * @low: lower
- * @high: higher
+ * lomuto_partition - Func  partitions the array using the Lomuto partition scheme.
+ * @array: The array to be partitionned.
+ * @low: lower val
+ * @high: Higher val
  * @size: array's size
  * Return: i
  */
@@ -53,7 +53,7 @@ void quickSort(int *array, int low, int high, size_t size)
 {
 	int pivot;
 
-	if (high > low)
+	if (low < high)
 	{
 		pivot = lomuto_partition(array, low, high, size);
 		quickSort(array, low, pivot - 1, size);
